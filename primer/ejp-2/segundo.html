@@ -1,0 +1,203 @@
+<html>
+
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(readxl)</span>   <span class="hl com"># libreria para abrir excel</span>
+<span class="hl kwd">library</span><span class="hl std">(dplyr)</span>    <span class="hl com"># libreria para manegar data frames</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(graphics)</span> <span class="hl com">#  libreria de grafos</span>
+<span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>  <span class="hl com">#  libreria de grafos</span>
+<span class="hl kwd">library</span><span class="hl std">(plotrix)</span>  <span class="hl com"># libreria de grafos</span>
+
+
+<span class="hl std">segundo</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">read_excel</span><span class="hl std">(</span><span class="hl str">&quot;segundo.xlsx&quot;</span><span class="hl std">,</span> <span class="hl kwc">col_names</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;2&quot;</span><span class="hl std">,</span><span class="hl str">&quot;3&quot;</span><span class="hl std">,</span><span class="hl str">&quot;4&quot;</span><span class="hl std">))</span>   <span class="hl com"># abrimos el excel</span>
+<span class="hl kwd">attach</span><span class="hl std">(segundo)</span>   <span class="hl com"># habilita las etiquetas del documento</span>
+<span class="hl kwd">class</span><span class="hl std">(segundo)</span>    <span class="hl com"># vemos la clase del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">typeof</span><span class="hl std">(segundo)</span>   <span class="hl com"># vemos el tipo de variable del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;list&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Msegundo</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">as.matrix</span><span class="hl std">(segundo)</span> <span class="hl com"># convertimos un data frame a una matriz</span>
+<span class="hl com">#Msegundo&lt;-data.frame(sort(Msegundo, decreasing = FALSE))  # los convertimos en una lista</span>
+<span class="hl kwd">print</span><span class="hl std">(Msegundo)</span>   <span class="hl com">#  imprimimos la matriz</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       1 2 3 4
+##  [1,] 4 3 2 1
+##  [2,] 3 4 2 4
+##  [3,] 2 5 2 3
+##  [4,] 1 3 1 3
+##  [5,] 2 2 3 2
+##  [6,] 2 3 2 1
+##  [7,] 3 3 0 1
+##  [8,] 4 4 1 2
+##  [9,] 5 6 2 0
+## [10,] 6 4 2 0
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">class</span><span class="hl std">(Msegundo)</span>   <span class="hl com">#  clases del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;matrix&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">typeof</span><span class="hl std">(Msegundo)</span>  <span class="hl com">#  tipo de variables del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(Msegundo)</span>   <span class="hl com">#  de la lista cuantas veces se repiten los numeros (numero de hermanos)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Msegundo
+##  0  1  2  3  4  5  6 
+##  3  6 12  9  6  2  2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">stem</span><span class="hl std">(Msegundo,</span><span class="hl kwc">scale</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>  <span class="hl com">#  Diagrama de tallo-hoja</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+##   The decimal point is at the |
+## 
+##   0 | 000
+##   1 | 000000
+##   2 | 000000000000
+##   3 | 000000000
+##   4 | 000000
+##   5 | 00
+##   6 | 00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">na</span><span class="hl kwb">&lt;-</span><span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwd">table</span><span class="hl std">(Msegundo))</span>   <span class="hl com">#volviendo una MATRIX a una TABLA.</span>
+<span class="hl kwd">colnames</span><span class="hl std">(na)</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;numero de hermanos&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;numero de alumnos&quot;</span><span class="hl std">)</span>   <span class="hl com"># dandole nombre a las columnas de la tabla.</span>
+<span class="hl kwd">print</span><span class="hl std">(na)</span>  <span class="hl com"># Imprimir tabla na</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   numero de hermanos numero de alumnos
+## 1                  0                 3
+## 2                  1                 6
+## 3                  2                12
+## 4                  3                 9
+## 5                  4                 6
+## 6                  5                 2
+## 7                  6                 2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">sum</span><span class="hl std">(</span><span class="hl kwd">table</span><span class="hl std">(Msegundo))</span>  <span class="hl com">#  suma  los que se reptieron (total de numero de alumnos)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 40
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">b</span><span class="hl kwb">&lt;-</span><span class="hl kwd">data.matrix</span><span class="hl std">(na)</span>
+<span class="hl kwd">plot</span><span class="hl std">(na,</span> <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;numero de hermanos segun un numero de alumnos&quot;</span><span class="hl std">,</span> <span class="hl kwc">las</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">cex.main</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">cex.lab</span><span class="hl std">=</span><span class="hl num">1.2</span><span class="hl std">,</span> <span class="hl kwc">ylim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">12</span><span class="hl std">))</span>
+<span class="hl kwd">points</span><span class="hl std">(na,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">16</span><span class="hl std">,</span> <span class="hl kwd">lines</span><span class="hl std">(na,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;brown&quot;</span><span class="hl std">),</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl std">frec.rela.prop</span><span class="hl kwb">&lt;-</span><span class="hl std">na[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">/</span><span class="hl num">40</span>   <span class="hl com">#  sacando la frecuencia relativa en proporcion</span>
+<span class="hl kwd">print</span><span class="hl std">(frec.rela.prop)</span>     <span class="hl com"># imprimiendo frecuencia. relativa. proporcional</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   numero de alumnos
+## 1             0.075
+## 2             0.150
+## 3             0.300
+## 4             0.225
+## 5             0.150
+## 6             0.050
+## 7             0.050
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">frec.rela.porc</span><span class="hl kwb">&lt;-</span><span class="hl std">na[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">/</span><span class="hl num">40</span><span class="hl opt">*</span><span class="hl num">100</span>  <span class="hl com">#   frecuencia relativa en porcentaje</span>
+<span class="hl kwd">print</span><span class="hl std">(frec.rela.porc)</span>     <span class="hl com"># imprimiendo frecuencia. relativa. en porcentaje</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##   numero de alumnos
+## 1               7.5
+## 2              15.0
+## 3              30.0
+## 4              22.5
+## 5              15.0
+## 6               5.0
+## 7               5.0
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">sum</span><span class="hl std">(frec.rela.porc</span><span class="hl kwb">&lt;-</span><span class="hl std">na[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">/</span><span class="hl num">40</span><span class="hl opt">*</span><span class="hl num">100</span><span class="hl std">)</span>   <span class="hl com">#suma total de los porcentajes</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 100
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">barplot</span><span class="hl std">(</span><span class="hl kwd">table</span><span class="hl std">(Msegundo),</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl kwc">space</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">legend.text</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">,</span>
+        <span class="hl kwc">horiz</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl kwc">axes</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl kwc">axisnames</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">,</span>
+        <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;numero de hermanos&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;numero de alumnos&quot;</span><span class="hl std">,</span>
+        <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;numero de hermanos segun un numero de alumnos&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-2.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<html>
+
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(readxl)</span> <span class="hl com">#leer archivos en excel</span>
+<span class="hl kwd">library</span><span class="hl std">(dplyr)</span>  <span class="hl com"># libreria para manipular frames</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(graphics)</span>  <span class="hl com">#  libreria de grafos</span>
+<span class="hl std">primero</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read_excel</span><span class="hl std">(</span><span class="hl str">&quot;primero.xlsx&quot;</span><span class="hl std">,</span> <span class="hl kwc">col_names</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>  <span class="hl com">#abrimos el documento</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## New names:
+## * `` -&gt; `..1`
+## * `` -&gt; `..2`
+## * `` -&gt; `..3`
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">typeof</span><span class="hl std">(primero)</span>  <span class="hl com"># vemos el tipo de variables del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;list&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(</span><span class="hl kwd">head</span><span class="hl std">(primero))</span>   <span class="hl com">#  imprime primero</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## # A tibble: 6 x 3
+##     ..1   ..2   ..3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    36    37    32
+## 2    19    35    72
+## 3    67    81    48
+## 4    36    59    56
+## 5    36    61    28
+## 6    37    41    36
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">primero1</span><span class="hl kwb">&lt;-</span><span class="hl kwd">as.matrix</span><span class="hl std">(primero)</span>  <span class="hl com"># convertimos una lista en una matriz </span>
+<span class="hl kwd">typeof</span><span class="hl std">(primero1)</span> <span class="hl com"># vemos el tipo de variables del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">print</span><span class="hl std">(primero1)</span> <span class="hl com">#imprime la matriz primero1</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       ..1 ..2 ..3
+##  [1,]  36  37  32
+##  [2,]  19  35  72
+##  [3,]  67  81  48
+##  [4,]  36  59  56
+##  [5,]  36  61  28
+##  [6,]  37  41  36
+##  [7,]  27  46  47
+##  [8,]  64  73  78
+##  [9,]  60  65  76
+## [10,]  35  45  63
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">sort</span><span class="hl std">(primero1,</span> <span class="hl kwc">decreasing</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">)</span>  <span class="hl com">#  ordenamos los resultados de menor a mayor.</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 19 27 28 32 35 35 36 36 36 36 37 37 41 45 46 47 48 56 59 60 61 63 64
+## [24] 65 67 72 73 76 78 81
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">segundo</span><span class="hl kwb">&lt;-</span><span class="hl kwd">data.frame</span><span class="hl std">(</span><span class="hl kwd">sort</span><span class="hl std">(primero1,</span> <span class="hl kwc">decreasing</span> <span class="hl std">=</span> <span class="hl num">FALSE</span><span class="hl std">))</span>  <span class="hl com"># los convertimos en una lista</span>
+<span class="hl kwd">typeof</span><span class="hl std">(segundo)</span>  <span class="hl com">#  vemos el tipo de variables del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;list&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">segundo1</span><span class="hl kwb">&lt;-</span><span class="hl kwd">as.matrix</span><span class="hl std">(segundo)</span>  <span class="hl com"># convertimos una lista en una matriz </span>
+<span class="hl kwd">typeof</span><span class="hl std">(segundo1)</span>  <span class="hl com">#  emos el tipo de variables del objeto</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;double&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">colnames</span><span class="hl std">(segundo)</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;edades&quot;</span><span class="hl std">)</span>  <span class="hl com">#  le agregamos un nombre a la columna.</span>
+<span class="hl kwd">colnames</span><span class="hl std">(segundo1)</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;edades&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">length</span><span class="hl std">(segundo1)</span>  <span class="hl com"># vemos el tamaño del vector</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 30
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">lugardelamediana</span><span class="hl kwb">&lt;-</span><span class="hl kwd">length</span><span class="hl std">((segundo1)</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">/</span><span class="hl num">2</span>   <span class="hl com">#  lugar de la mediana</span>
+<span class="hl kwd">print</span><span class="hl std">(segundo1[</span><span class="hl num">15</span><span class="hl opt">:</span><span class="hl num">16</span><span class="hl std">])</span>  <span class="hl com"># los lugares de la mediana son 15,y 16</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 46 47
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">(</span><span class="hl num">46</span><span class="hl opt">+</span><span class="hl num">47</span><span class="hl std">)</span><span class="hl opt">/</span><span class="hl num">2</span> <span class="hl com"># el valor de la mediana es  46.5</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 46.5
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">stem</span><span class="hl std">(segundo</span><span class="hl opt">$</span><span class="hl std">edades)</span>  <span class="hl com"># we create a steam- and -leaf-diagram of edades</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##   1 | 9
+##   2 | 78
+##   3 | 255666677
+##   4 | 15678
+##   5 | 69
+##   6 | 013457
+##   7 | 2368
+##   8 | 1
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">tabulate</span><span class="hl std">(segundo</span><span class="hl opt">$</span><span class="hl std">edades)</span> <span class="hl com"># de 1-80 cuantas veces se repitio el numero ?</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 1 0 0 2
+## [36] 4 2 0 0 0 1 0 0 0 1 1 1 1 0 0 0 0 0 0 0 1 0 0 1 1 1 0 1 1 1 0 1 0 0 0
+## [71] 0 1 1 0 0 1 0 1 0 0 1
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">table</span><span class="hl std">(segundo</span><span class="hl opt">$</span><span class="hl std">edades)</span>  <span class="hl com"># solo de los resultados cuales se repitieron?</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+## 19 27 28 32 35 36 37 41 45 46 47 48 56 59 60 61 63 64 65 67 72 73 76 78 81 
+##  1  1  1  1  2  4  2  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+</pre></div>
+</div></div>
+
+</body>
+</html>

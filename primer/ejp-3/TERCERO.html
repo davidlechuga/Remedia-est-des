@@ -1,0 +1,288 @@
+<html>
+
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+</head>
+
+<body>
+
+<p>This is an R HTML document. When you click the <b>Knit HTML</b> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(readxl)</span>   <span class="hl com"># libreria para abrir excel</span>
+<span class="hl kwd">library</span><span class="hl std">(dplyr)</span>    <span class="hl com"># libreria para manegar data frames</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'dplyr'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(graphics)</span> <span class="hl com">#  libreria de grafos</span>
+<span class="hl kwd">library</span><span class="hl std">(ggplot2)</span>  <span class="hl com">#  libreria de grafos</span>
+<span class="hl kwd">library</span><span class="hl std">(plotrix)</span>  <span class="hl com"># libreria de grafos</span>
+<span class="hl com">#install.packages(&quot;fdth&quot;) #  instalamos paqueteria para el calculo de distribuciones de frecuencia</span>
+<span class="hl com">#install.packages(&quot;agricolae&quot;)</span>
+<span class="hl kwd">library</span><span class="hl std">(fdth)</span>
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'fdth'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following objects are masked from 'package:stats':
+## 
+##     sd, var
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(agricolae)</span>
+
+
+<span class="hl std">tercero</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">read_excel</span><span class="hl std">(</span><span class="hl str">&quot;tercero.xlsx&quot;</span><span class="hl std">,</span> <span class="hl kwc">col_names</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;1&quot;</span><span class="hl std">,</span><span class="hl str">&quot;2&quot;</span><span class="hl std">,</span><span class="hl str">&quot;3&quot;</span><span class="hl std">,</span><span class="hl str">&quot;4&quot;</span><span class="hl std">,</span><span class="hl str">&quot;5&quot;</span><span class="hl std">))</span>   <span class="hl com"># abrimos el excel</span>
+<span class="hl com">#attach(tercero)   # habilita las etiquetas del documento</span>
+<span class="hl com">#class(tercero)    # vemos la clase del objeto</span>
+<span class="hl com">#typeof(tercero)   # vemos el tipo de variable del objeto</span>
+<span class="hl std">Mtercero</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">as.matrix</span><span class="hl std">(tercero)</span> <span class="hl com"># convertimos un data frame a una matriz</span>
+<span class="hl std">Mtercero</span><span class="hl kwb">&lt;-</span><span class="hl kwd">as.vector</span><span class="hl std">(Mtercero)</span>
+<span class="hl std">Mtercero</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] 88 74 67 49 69 38 86 77 66 75 94 67 78 69 84 50 39 58 79 70 90 79 97
+## [24] 75 98 77 64 69 82 71 65 68 84 73 58 78 75 89 91 62 72 62 74 81 79 81
+## [47] 86 78 90 81
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com">#Msegundo&lt;-data.frame(sort(Msegundo, decreasing = FALSE))  # los convertimos en una lista</span>
+<span class="hl com">#print(Mtercero)   #  imprimimos la matriz</span>
+<span class="hl com">#class(Mtercero)   #  clases del objeto</span>
+<span class="hl com">#typeof(Mtercero)  #  tipo de variables del objeto</span>
+<span class="hl com">#table(Mtercero)   #  de la lista cuantas veces se repiten los numeros (numero de hermanos)</span>
+<span class="hl kwd">stem</span><span class="hl std">(Mtercero,</span><span class="hl kwc">scale</span> <span class="hl std">=</span> <span class="hl num">1</span><span class="hl std">)</span>  <span class="hl com">#  Diagrama de tallo-hoja</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##   3 | 89
+##   4 | 9
+##   5 | 088
+##   6 | 22456778999
+##   7 | 01234455577888999
+##   8 | 1112446689
+##   9 | 001478
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">mtercero</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">fdt</span><span class="hl std">(Mtercero,</span><span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl str">&quot;Sturges&quot;</span><span class="hl std">)</span>
+<span class="hl std">mtercero</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  Class limits  f   rf rf(%) cf cf(%)
+##       [38,46)  2 0.04     4  2     4
+##       [46,55)  2 0.04     4  4     8
+##       [55,64)  4 0.08     8  8    16
+##       [64,73) 12 0.24    24 20    40
+##       [73,81) 17 0.34    34 37    74
+##       [81,90)  9 0.18    18 46    92
+##       [90,99)  4 0.08     8 50   100
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># particiona mi ventana grafica en 3x2.</span>
+
+
+<span class="hl kwd">hist</span><span class="hl std">(Mtercero,</span> <span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl str">&quot;sturges&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">21</span><span class="hl std">),</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;skyblue1&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Sturges)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot; Numero de Alumnos con esa calificación&quot;</span><span class="hl std">,</span> <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span> <span class="hl com">#histograma utilizando el numero de clases según Sturges.</span>
+
+
+<span class="hl kwd">plot</span><span class="hl std">(mtercero,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;fh&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Límites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuecia absoluta&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;tomato3&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa calificación&quot;</span><span class="hl std">)</span>   <span class="hl com">###  Histograma con la frecuencia absoluta y con limites de clase.</span>
+
+
+<span class="hl kwd">plot</span><span class="hl std">(mtercero,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;fp&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Limites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa calificación (poligono de frecuencias o Gauss Suavizada)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex.main</span><span class="hl std">=</span><span class="hl str">&quot;0.85&quot;</span><span class="hl std">,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;darkgreen&quot;</span><span class="hl std">)</span>  <span class="hl com">### Poligono de Frecuencia o campana de Gauss Suavizada con Frecuencia Absoluta y con Límites Reales</span>
+
+
+<span class="hl std">desa</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">48</span><span class="hl std">,</span><span class="hl num">46</span><span class="hl std">,</span><span class="hl num">41</span><span class="hl std">,</span><span class="hl num">29</span><span class="hl std">,</span><span class="hl num">12</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">)</span>    <span class="hl com">#  Se toman los valores de la frecuencia desacumulada</span>
+<span class="hl std">desa</span><span class="hl kwb">&lt;-</span><span class="hl std">desa</span><span class="hl opt">/</span><span class="hl num">50</span><span class="hl opt">*</span><span class="hl num">100</span>             <span class="hl com">#  Los valores en des se dividen por N   y se  multiplica por 100</span>
+<span class="hl std">desa</span><span class="hl kwb">&lt;-</span><span class="hl kwd">sort</span><span class="hl std">(desa,</span><span class="hl kwc">decreasing</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>    <span class="hl com">#   Se ordenan de mayor a menor los %</span>
+<span class="hl std">desa</span>                         <span class="hl com">#  imprime valores de des</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 100  96  92  82  58  24   6   0
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">aa</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">37.5</span><span class="hl std">,</span><span class="hl num">46.5</span><span class="hl std">,</span><span class="hl num">55.5</span><span class="hl std">,</span><span class="hl num">64.5</span><span class="hl std">,</span><span class="hl num">73.5</span><span class="hl std">,</span><span class="hl num">82.5</span><span class="hl std">,</span><span class="hl num">91.5</span><span class="hl std">,</span><span class="hl num">100.5</span><span class="hl std">)</span>    <span class="hl com"># Se crea un string con valores del ancho del intervalo &quot;eje x&quot;</span>
+<span class="hl std">aa</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  37.5  46.5  55.5  64.5  73.5  82.5  91.5 100.5
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">bb</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">8</span><span class="hl std">,</span><span class="hl num">18</span><span class="hl std">,</span><span class="hl num">42</span><span class="hl std">,</span><span class="hl num">76</span><span class="hl std">,</span><span class="hl num">94</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">)</span>       <span class="hl com"># Se crea un string con valores de la frecuencia acumulada en %</span>
+<span class="hl std">bb</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]   0   4   8  18  42  76  94 100
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(aa, bb,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;o&quot;</span><span class="hl std">,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;darkorchid&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">110</span><span class="hl std">),</span> <span class="hl kwc">xlim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">110</span><span class="hl std">),</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Porcentaje de Alumnos con esa calificación&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta y desacumulada en %&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;ancho de la Variable discontinua&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(aa,desa,</span><span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;o&quot;</span><span class="hl std">,</span><span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">)</span>     <span class="hl com">#   Se crea un Polígono porcentual con las frecuencias desacumlada y acumulada.</span>
+
+
+
+
+
+<span class="hl com">#range(Mtercero)   # Recorrido de la vriable</span>
+<span class="hl com">#rango&lt;- 98-38     # valor del rango   max - min </span>
+<span class="hl com">#a&lt;-log10(50)      #  operacion de logaritmo base 10 (N)</span>
+<span class="hl com">#b&lt;-a*3.22+1       #  multiplicacion  1 + 3.322 log (N)</span>
+<span class="hl com">#c&lt;-rango/b        #  divición R A N G O / 1 + 3.322 LOG (N)  El resultado se redonde a 9</span>
+<span class="hl com">#numclas&lt;-(rango+1)/9  # Se encuentran los numeros de intervalo o clases (R A N G O + 1) / i  **   ** Y  SE   R  E  D O N  D  E  A  &quot;   7  &quot;</span>
+<span class="hl com">#numclas</span>
+
+
+
+<span class="hl com">#data=sample(38:100,50,replace=F)</span>
+<span class="hl com">#data</span>
+<span class="hl com">#m=matrix(data,ncol=5,nrow=10)</span>
+<span class="hl com">#c=cut(data,breaks=c(38,46,55,64,72,80,88,96))</span>
+<span class="hl com">#w=table(c)</span>
+<span class="hl com">#w</span>
+
+
+<span class="hl std">x</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">61</span><span class="hl std">,</span><span class="hl num">33</span><span class="hl std">,</span><span class="hl num">35</span><span class="hl std">,</span><span class="hl num">74</span><span class="hl std">,</span><span class="hl num">48</span><span class="hl std">,</span><span class="hl num">53</span><span class="hl std">,</span><span class="hl num">53</span><span class="hl std">,</span><span class="hl num">48</span><span class="hl std">,</span><span class="hl num">23</span><span class="hl std">,</span><span class="hl num">19</span><span class="hl std">,</span><span class="hl num">15</span><span class="hl std">,</span><span class="hl num">57</span><span class="hl std">,</span><span class="hl num">72</span><span class="hl std">,</span><span class="hl num">40</span><span class="hl std">,</span><span class="hl num">27</span><span class="hl std">,</span><span class="hl num">25</span><span class="hl std">,</span><span class="hl num">75</span><span class="hl std">,</span><span class="hl num">66</span><span class="hl std">,</span><span class="hl num">34</span><span class="hl std">,</span><span class="hl num">27</span><span class="hl std">,</span><span class="hl num">38</span><span class="hl std">,</span><span class="hl num">16</span><span class="hl std">,</span><span class="hl num">42</span><span class="hl std">,</span><span class="hl num">57</span><span class="hl std">,</span><span class="hl num">27</span><span class="hl std">,</span><span class="hl num">59</span><span class="hl std">,</span><span class="hl num">37</span><span class="hl std">,</span><span class="hl num">63</span><span class="hl std">,</span><span class="hl num">71</span><span class="hl std">,</span><span class="hl num">48</span><span class="hl std">)</span>   <span class="hl com"># se crea una cadena de numeros</span>
+<span class="hl com">#x</span>
+<span class="hl com">#sort(x, decreasing = FALSE)   # ordena la cadena de numero de menor a mayor</span>
+<span class="hl com">#range(x)          # se encuentran los valores max y  min   de la cadena de numeros</span>
+<span class="hl com">#rango&lt;- 75-15     #  se encuentra el rango restando valor max - min </span>
+<span class="hl com">#length(x)         #  el tamaño de la cadena de numero</span>
+<span class="hl com">#a&lt;-log10(30)      #  operacion de logaritmo base 10 (N)</span>
+<span class="hl com">#b&lt;-a*3.22+1       #  multiplicacion  1 + 3.322 log (N)</span>
+<span class="hl com">#c&lt;-rango/b        #  divición R A N G O / 1 + 3.322 LOG (N)  El resultado se redonde a 9</span>
+
+<span class="hl std">dist</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">fdt</span><span class="hl std">(x,</span><span class="hl kwc">breaks</span><span class="hl std">=</span><span class="hl str">&quot;Sturges&quot;</span><span class="hl std">)</span> <span class="hl com"># calcula la distribución de frecuencias utilizando la regla Sturge</span>
+<span class="hl std">dist</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  Class limits f   rf rf(%) cf  cf(%)
+##       [15,25) 4 0.13 13.33  4  13.33
+##       [25,35) 7 0.23 23.33 11  36.67
+##       [35,45) 4 0.13 13.33 15  50.00
+##       [45,55) 5 0.17 16.67 20  66.67
+##       [55,66) 5 0.17 16.67 25  83.33
+##       [66,76) 5 0.17 16.67 30 100.00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">par</span><span class="hl std">(</span><span class="hl kwc">mfrow</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span> <span class="hl com"># particiona mi ventana grafica en 3x2.</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(x,</span> <span class="hl kwc">breaks</span> <span class="hl std">=</span> <span class="hl str">&quot;Sturges&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">6</span><span class="hl std">),</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;skyblue1&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Sturges)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot; Numero de Alumnos con esa calificación&quot;</span><span class="hl std">,</span> <span class="hl kwc">labels</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span> <span class="hl com">#histograma utilizando el numero de clases según Sturges.</span>
+
+<span class="hl kwd">plot</span><span class="hl std">(dist,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;fh&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Límites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuecia absoluta&quot;</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;tomato3&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa calificación&quot;</span><span class="hl std">)</span>   <span class="hl com">###  Histograma con la frecuencia absoluta y con limites de clase.</span>
+
+<span class="hl kwd">plot</span><span class="hl std">(dist,</span><span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;cfh&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">33</span><span class="hl std">),</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa calificacion&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta acumulada&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Límites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;gold2&quot;</span><span class="hl std">)</span>   <span class="hl com">## Histograma con frecuencia absoluta acumulada y con limites reales.</span>
+
+
+<span class="hl kwd">plot</span><span class="hl std">(dist,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;fp&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Limites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa calificación (poligono de frecuencias o Gauss Suavizada)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">cex.main</span><span class="hl std">=</span><span class="hl str">&quot;0.85&quot;</span><span class="hl std">,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;darkgreen&quot;</span><span class="hl std">)</span>  <span class="hl com">### Poligono de Frecuencia o campana de Gauss Suavizada con Frecuencia Absoluta y con Límites Reales</span>
+
+
+<span class="hl kwd">plot</span><span class="hl std">(dist,</span> <span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;cfpp&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Ancho de la variable discontinua (Limites Reales)&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia Absoluta Acumulada en % &quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Numero de Alumnos con esa Calificacion&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;darkorchid&quot;</span><span class="hl std">,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">120</span><span class="hl std">))</span>
+    <span class="hl com">###   Ojiva de la Frecuencia Absoluta Acumulada en % con Límites  Reales</span>
+
+
+<span class="hl std">des</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">11</span><span class="hl std">,</span><span class="hl num">15</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">25</span><span class="hl std">,</span><span class="hl num">30</span><span class="hl std">)</span>    <span class="hl com">#  Se toman los valores de la frecuencia desacumulada</span>
+<span class="hl std">des</span><span class="hl kwb">&lt;-</span><span class="hl std">des</span><span class="hl opt">/</span><span class="hl num">30</span><span class="hl opt">*</span><span class="hl num">100</span>             <span class="hl com">#  Los valores en des se dividen por N   y se  multiplica por 100</span>
+<span class="hl std">des</span><span class="hl kwb">&lt;-</span><span class="hl kwd">sort</span><span class="hl std">(des,</span><span class="hl kwc">decreasing</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>    <span class="hl com">#   Se ordenan de mayor a menor los %</span>
+<span class="hl std">des</span>                         <span class="hl com">#  imprime valores de des</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 100.00000  83.33333  66.66667  50.00000  36.66667  13.33333
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">xx</span><span class="hl kwb">&lt;-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">14.85</span><span class="hl std">,</span><span class="hl num">25</span><span class="hl std">,</span><span class="hl num">35.15</span><span class="hl std">,</span><span class="hl num">55.45</span><span class="hl std">,</span><span class="hl num">65.60</span><span class="hl std">,</span><span class="hl num">75.75</span><span class="hl std">)</span>    <span class="hl com"># Se crea un string con valores del ancho del intervalo &quot;eje x&quot;</span>
+<span class="hl std">xx</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 14.85 25.00 35.15 55.45 65.60 75.75
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">dd</span><span class="hl kwb">&lt;-</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">13.33</span><span class="hl std">,</span><span class="hl num">36.67</span><span class="hl std">,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">66.67</span><span class="hl std">,</span><span class="hl num">83.33</span><span class="hl std">,</span><span class="hl num">100</span><span class="hl std">)</span>       <span class="hl com"># Se crea un string con valores de la frecuencia acumulada en %</span>
+<span class="hl std">dd</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  13.33  36.67  50.00  66.67  83.33 100.00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(xx, dd,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;o&quot;</span><span class="hl std">,</span> <span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;darkorchid&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">110</span><span class="hl std">),</span> <span class="hl kwc">xlim</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">110</span><span class="hl std">),</span>
+     <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Porcentaje de Alumnos con esa calificación&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Frecuencia absoluta y desacumulada en %&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;ancho de la Variable discontinua&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">lines</span><span class="hl std">(des,dd,</span><span class="hl kwc">type</span><span class="hl std">=</span><span class="hl str">&quot;o&quot;</span><span class="hl std">,</span><span class="hl kwc">pch</span><span class="hl std">=</span><span class="hl num">15</span><span class="hl std">,</span> <span class="hl kwc">col</span><span class="hl std">=</span><span class="hl str">&quot;black&quot;</span><span class="hl std">)</span>     <span class="hl com">#   Se crea un Polígono porcentual con las frecuencias desacumlada y acumulada.</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-2.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+
+</body>
+</html>
